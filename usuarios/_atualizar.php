@@ -86,11 +86,12 @@
                     try {
                         
                         if (isset($_POST['txtSenha']) and !empty($_POST['txtSenha'])) {
-                            $update = $pdo->prepare('UPDATE usuarios SET nome=:nome, email=:email, senha=:senha WHERE id=:id');
+                            $update = $pdo->prepare('UPDATE usuarios SET nome=:nome, email=:email, senha=:senha, salt=:salt WHERE id=:id');
                             $update->bindValue(':id',$txtId);
                             $update->bindValue(':nome',$txtNome);
                             $update->bindValue(':email',$txtEmail);
                             $update->bindValue(':senha',$txtSenha);
+                            $update->bindValue(':salt',$salt);
                         } else {
                             $update = $pdo->prepare('UPDATE usuarios SET nome=:nome, email=:email WHERE id=:id');
                             $update->bindValue(':id',$txtId);

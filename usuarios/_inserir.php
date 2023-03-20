@@ -40,7 +40,7 @@
                     array_push($erros, 'O E-MAIL digitado é inválido');
                 }
             } else {
-                array_push($erros, 'Preencha o campo USUÁRIO');
+                array_push($erros, 'Preencha o campo E-MAIL');
             }
         // **************************************************************************************
 
@@ -73,10 +73,11 @@
                 // Realiza a operação de INSERT no BD *******************************************
                     try {
                         
-                        $insert = $pdo->prepare('INSERT INTO usuarios (nome, email, senha) VALUES (:nome, :email, :senha)');
+                        $insert = $pdo->prepare('INSERT INTO usuarios (nome, email, senha, salt) VALUES (:nome, :email, :senha, :salt)');
                         $insert->bindValue(':nome',$txtNome);
                         $insert->bindValue(':email',$txtEmail);
                         $insert->bindValue(':senha',$txtSenha);
+                        $insert->bindValue(':salt',$salt);
                         
                         if ($insert->execute()) {
                             header('Location:index.php');
